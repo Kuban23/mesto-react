@@ -23,88 +23,88 @@ function App() {
 
          {/* <!-- Блок popup profile ----------------------------------------------------------------------------> */}
 
-         <section class="popup popup_type_profile">
-            <div class="popup__container">
-               <form class="popup__form popup__form-prof" name="profile_form" novalidate>
-                  <button class="popup__close" type="button" aria-label="Кнопка закрытия окна"></button>
-                  <h2 class="popup__title">Редактировать профиль</h2>
-                  <input class="popup__input popup__input_type_name" type="text" name="name" id="name-input" placeholder="Имя"
+         <section className="popup popup_type_profile">
+            <div className="popup__container">
+               <form className="popup__form popup__form-prof" name="profile_form" novalidate>
+                  <button className="popup__close" type="button" aria-label="Кнопка закрытия окна"></button>
+                  <h2 className="popup__title">Редактировать профиль</h2>
+                  <input className="popup__input popup__input_type_name" type="text" name="name" id="name-input" placeholder="Имя"
                      required minlength="2" maxlength="40" />
-                  <span class="popup__input-error name-input-error"></span>
-                  <input class="popup__input popup__input_type_profession" type="text" name="about" id="profession-input"
+                  <span className="popup__input-error name-input-error"></span>
+                  <input className="popup__input popup__input_type_profession" type="text" name="about" id="profession-input"
                      placeholder="Профессия" required minlength="2" maxlength="200" />
-                  <span class="popup__input-error profession-input-error"></span>
-                  <button class="popup__submit-button" type="submit" aria-label="Кнопка cохранить">Сохранить</button>
+                  <span className="popup__input-error profession-input-error"></span>
+                  <button className="popup__submit-button" type="submit" aria-label="Кнопка cохранить">Сохранить</button>
                </form>
             </div>
          </section>
 
          {/* <!-- Блок popup добавление карточки ----------------------------------------------------------------------------> */}
-         <section class="popup popup_type_addImage">
-            <div class="popup__container">
-               <form class="popup__form popup__form-image" name="form-image" novalidate>
-                  <button class="popup__close" type="button" aria-label="Кнопка закрытия окна"></button>
-                  <h2 class="popup__title">Новое место</h2>
-                  <input class="popup__input popup__input_type_name popup__input_type_title" name="name" type="text"
+         <section className="popup popup_type_addImage">
+            <div className="popup__container">
+               <form className="popup__form popup__form-image" name="form-image" novalidate>
+                  <button className="popup__close" type="button" aria-label="Кнопка закрытия окна"></button>
+                  <h2 className="popup__title">Новое место</h2>
+                  <input className="popup__input popup__input_type_name popup__input_type_title" name="name" type="text"
                      id="title-input" placeholder="Название" required minlength="2" maxlength="30" />
-                  <span class="popup__input-error title-input-error"></span>
-                  <input class="popup__input popup__input_type_profession popup__input_type_link" name="link" id="link-input"
+                  <span className="popup__input-error title-input-error"></span>
+                  <input className="popup__input popup__input_type_profession popup__input_type_link" name="link" id="link-input"
                      type="url" placeholder="Ссылка на картинку" required />
-                  <span class="popup__input-error link-input-error"></span>
-                  <button class="popup__submit-button popup__submit-button_type_image" type="submit"
+                  <span className="popup__input-error link-input-error"></span>
+                  <button className="popup__submit-button popup__submit-button_type_image" type="submit"
                      aria-label="Кнопка создать">Создать</button>
                </form>
             </div>
          </section>
 
          {/* <!-- Блок popup открытие попапа с картинкой ----------------------------------------------------------------------------> */}
-         <section class="popup popup_type_image">
-            <div class="popup__container-image">
-               <button class="popup__close popup__close_type_emage" type="button" aria-label="Кнопка закрытия окна"></button>
-               <figure class="popup__group">
-                  <img class="popup__image" src="#" alt="Изображен край или область России" />
-                  <figcaption class="popup__title-image">Наименование</figcaption>
+         <section className="popup popup_type_image">
+            <div className="popup__container-image">
+               <button className="popup__close popup__close_type_emage" type="button" aria-label="Кнопка закрытия окна"></button>
+               <figure className="popup__group">
+                  <img className="popup__image" src="#" alt="Изображен край или область России" />
+                  <figcaption className="popup__title-image">Наименование</figcaption>
                </figure>
             </div>
          </section>
 
 
          {/* <!-- Блок popup открытие попапа с аватаром ----------------------------------------------------------------------------> */}
-         <section class="popup popup_type_avatar">
-            <div class="popup__container">
-               <button class="popup__close" type="button" aria-label="Кнопка закрытия окна"></button>
-               <h2 class="popup__title">Обновить аватар</h2>
-               <form class="popup__form popup__form-avatar" name="form-avatar" novalidate>
-                  <input class="popup__input popup__input_type_link popup__input-avatar" name="link" id="avatar-link-input"
+         <section className="popup popup_type_avatar">
+            <div className="popup__container">
+               <button className="popup__close" type="button" aria-label="Кнопка закрытия окна"></button>
+               <h2 className="popup__title">Обновить аватар</h2>
+               <form className="popup__form popup__form-avatar" name="form-avatar" novalidate>
+                  <input className="popup__input popup__input_type_link popup__input-avatar" name="link" id="avatar-link-input"
                      type="url" placeholder="Ссылка на аватар" required />
-                  <span class="popup__input-error avatar-link-input-error"></span>
-                  <button class="popup__submit-button" type="submit" aria-label="Кнопка cохранить">Сохранить</button>
+                  <span className="popup__input-error avatar-link-input-error"></span>
+                  <button className="popup__submit-button" type="submit" aria-label="Кнопка cохранить">Сохранить</button>
                </form>
             </div>
          </section>
 
          {/* <!-- Блок popup открытие попапа для удаления карточки ----------------------------------------------------------------------------> */}
-         <section class="popup popup_type_delete">
-            <div class="popup__container">
-               <button class="popup__close" type="button" aria-label="Кнопка закрытия окна"></button>
-               <h2 class="popup__title">Вы уверены?</h2>
-               <form class="popup__form" name="form_delete" novalidate>
-                  <button class="popup__submit-button popup__submit-button_type_delete" type="submit" aria-label="Кнопка да">Да</button>
+         <section className="popup popup_type_delete">
+            <div className="popup__container">
+               <button className="popup__close" type="button" aria-label="Кнопка закрытия окна"></button>
+               <h2 className="popup__title">Вы уверены?</h2>
+               <form className="popup__form" name="form_delete" novalidate>
+                  <button className="popup__submit-button popup__submit-button_type_delete" type="submit" aria-label="Кнопка да">Да</button>
                </form>
             </div>
          </section>
 
          {/* <!-- Шаблон для карточек-фото ----------------------------------------------------------------------------> */}
-         <template class="photo-template">
-            <div class="photo">
-               <div class="photo__element">
-                  <button class="photo__trash" type="button" aria-label="Кнопка для удаления "></button>
-                  <img class="photo__image" src="#" alt="Изображен край или область России" />
-                  <div class="photo__title">
-                     <h2 class="photo__text"></h2>
-                     <div class="photo__like-container">
-                        <button class="photo__like" type="button" aria-label="Кнопка для добавления лайков"></button>
-                        <p class="photo__like-sum">0</p>
+         <template className="photo-template">
+            <div className="photo">
+               <div className="photo__element">
+                  <button className="photo__trash" type="button" aria-label="Кнопка для удаления "></button>
+                  <img className="photo__image" src="#" alt="Изображен край или область России" />
+                  <div className="photo__title">
+                     <h2 className="photo__text"></h2>
+                     <div className="photo__like-container">
+                        <button className="photo__like" type="button" aria-label="Кнопка для добавления лайков"></button>
+                        <p className="photo__like-sum">0</p>
                      </div>
                   </div>
                </div>

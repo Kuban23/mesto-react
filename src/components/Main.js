@@ -1,30 +1,44 @@
 
 
 function Main() {
+
+   function handleEditAvatarClick() {
+      document.querySelector('.popup_type_avatar').classList.add('popup_opened');
+   };
+
+   function handleEditProfileClick() {
+      document.querySelector('.popup_type_profile').classList.add('popup_opened');
+   };
+
+   function handleEditPlaceClick() {
+      document.querySelector('.popup_type_addImage').classList.add('popup_opened');
+   };
+
    return (
 
-      <main class="content">
+      <main className="content">
 
          {/* <!--Блок profile ----------------------------------------------------------------------------> */}
-         
-         <section class="profile">
-            <div class="profile__image">
-               <img class="profile__avatar" src="<%=require('./image/avatar.jpg')%>" alt="Изображение Аватарки" />
+
+         <section className="profile">
+            <div className="profile__image"  onClick={handleEditAvatarClick}>
+               <img className="profile__avatar" src="<%=require('./image/avatar.jpg')%>" alt="Изображение Аватарки" />
             </div>
 
-            <div class="profile__info">
-               <div class="profile__wrapper">
-                  <h1 class="profile__name">Жак-Ив Кусто</h1>
-                  <button class="profile__edit-button" type="button" aria-label="Кнопка редактирования профиля"></button>
+            <div className="profile__info">
+               <div className="profile__wrapper">
+                  <h1 className="profile__name">Жак-Ив Кусто</h1>
+                  <button className="profile__edit-button" onClick={handleEditProfileClick} type="button" aria-label="Кнопка редактирования профиля"></button>
                </div>
-               <p class="profile__profession">Исследователь океана</p>
+               <p className="profile__profession">Исследователь океана</p>
             </div>
-            <button class="profile__add-button" type="button" aria-label="Кнопка для добавления фото"></button>
+            <button className="profile__add-button" onClick={handleEditPlaceClick} type="button" aria-label="Кнопка для добавления фото"></button>
          </section>
 
          {/* <!--Блок elements ----------------------------------------------------------------------------> */}
 
-         <section class="galery"></section>
+         <section className="galery"></section>
+
 
       </main>
 
