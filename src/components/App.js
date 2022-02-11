@@ -1,47 +1,25 @@
-import logo from './logo.svg';
-import './index.css';
-import header_logo from './image/header_logo.svg';
+//import logo from './logo.svg';
+import '../index.css';
+// import header_logo from '../image/header_logo.svg';
+import Header from './Header';
+import Main from './Main';
+import Footer from './Footer';
 
 function App() {
    return (
       <div className="page">
 
          {/* <!-- Блок header----------------------------------------------------------------------------> */}
+         <Header />
 
-         <header class="header">
-            <img class="header__logo" src={header_logo} alt="Логотип Mesto Russia" />
-         </header>
-
-         <main class="content">
-
-            {/* <!--Блок profile ----------------------------------------------------------------------------> */}
-
-            <section class="profile">
-               <div class="profile__image">
-                  <img class="profile__avatar" src="<%=require('./image/avatar.jpg')%>" alt="Изображение Аватарки" />
-               </div>
-
-               <div class="profile__info">
-                  <div class="profile__wrapper">
-                     <h1 class="profile__name">Жак-Ив Кусто</h1>
-                     <button class="profile__edit-button" type="button" aria-label="Кнопка редактирования профиля"></button>
-                  </div>
-                  <p class="profile__profession">Исследователь океана</p>
-               </div>
-               <button class="profile__add-button" type="button" aria-label="Кнопка для добавления фото"></button>
-            </section>
-
-            {/* <!--Блок elements ----------------------------------------------------------------------------> */}
-
-            <section class="galery"></section>
-
-         </main>
+         {/* <!--Блок profile ----------------------------------------------------------------------------> */}
+         {/* <!--Блок elements ----------------------------------------------------------------------------> */}
+         <Main />
 
          {/* <!-- Блок footer ----------------------------------------------------------------------------> */}
+         <Footer />
 
-         <footer class="footer">
-            <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
-         </footer>
+
 
          {/* <!-- Блок popup profile ----------------------------------------------------------------------------> */}
 
