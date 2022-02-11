@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './index.css';
-import './image/header_logo.svg';
+import header_logo from './image/header_logo.svg';
 
 function App() {
    return (
@@ -9,7 +9,7 @@ function App() {
          {/* <!-- Блок header----------------------------------------------------------------------------> */}
 
          <header class="header">
-            <img class="header__logo" src="<%=require('./image/header_logo.svg')%>" alt="Логотип Mesto Russia" />
+            <img class="header__logo" src={header_logo} alt="Логотип Mesto Russia" />
          </header>
 
          <main class="content">
