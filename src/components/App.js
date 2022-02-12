@@ -4,7 +4,6 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
-import { Children } from 'react/cjs/react.production.min';
 //import ImagePopup from './ImagePopup';
 
 function App() {
@@ -21,10 +20,16 @@ function App() {
    function handleEditProfileClick() {
       setIsEditProfilePopupOpen(true);
    };
-
    function handleEditPlaceClick() {
       setIsAddPlacePopupOpen(true);
    };
+
+   // Закрываем все попапы
+   function closeAllPopup(){
+      setIsEditAvatarPopupOpen(false);
+      setIsEditProfilePopupOpen(false);
+      setIsAddPlacePopupOpen(false);
+   }
 
 
    return (
@@ -42,7 +47,7 @@ function App() {
          <Footer />
 
          {/* <!-- Блок popup открытие попапа с аватаром ----------------------------------------------------------------------------> */}
-         <PopupWithForm title='Обновить аватар' isOpen={isEditAvatarPopupOpen} buttonTitleSubmit='Сохранить'>
+         <PopupWithForm title='Обновить аватар' isOpen={isEditAvatarPopupOpen} buttonTitleSubmit='Сохранить' onClose={closeAllPopup}>
             <form className="popup__form popup__form-avatar" name="form-avatar" novalidate>
                <input className="popup__input popup__input_type_link popup__input-avatar" name="link" id="avatar-link-input"
                   type="url" placeholder="Ссылка на аватар" required />
@@ -51,7 +56,7 @@ function App() {
          </PopupWithForm>
 
          {/* <!-- Блок popup profile ----------------------------------------------------------------------------> */}
-         <PopupWithForm title='Редактировать профиль' isOpen={isEditProfilePopupOpen} buttonTitleSubmit='Сохранить'>
+         <PopupWithForm title='Редактировать профиль' isOpen={isEditProfilePopupOpen} buttonTitleSubmit='Сохранить' onClose={closeAllPopup}>
             <form className="popup__form popup__form-prof" name="profile_form" novalidate>
                <input className="popup__input popup__input_type_name" type="text" name="name" id="name-input" placeholder="Имя"
                   required minlength="2" maxlength="40" />
@@ -63,7 +68,7 @@ function App() {
          </PopupWithForm>
 
          {/* <!-- Блок popup добавление карточки ----------------------------------------------------------------------------> */}
-         <PopupWithForm title='Новое место' isOpen={isAddPlacePopupOpen} buttonTitleSubmit='Создать'>
+         <PopupWithForm title='Новое место' isOpen={isAddPlacePopupOpen} buttonTitleSubmit='Создать' onClose={closeAllPopup}>
             <form className="popup__form popup__form-image" name="form-image" novalidate>
                <input className="popup__input popup__input_type_name popup__input_type_title" name="name" type="text"
                   id="title-input" placeholder="Название" required minlength="2" maxlength="30" />

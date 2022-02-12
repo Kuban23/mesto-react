@@ -5,7 +5,7 @@ function PopupWithForm(props) {
       <section className={`popup popup_type_${props.name} ${props.isOpen ? 'popup_opened' : ''}`}>
          <div className="popup__container">
             <form className="popup__form popup__form-prof" name={`${props.name}_form}`} novalidate>
-               <button className="popup__close" type="button" aria-label="Кнопка закрытия окна"></button>
+               <button className="popup__close" onClick={props.onClose} type="button" aria-label="Кнопка закрытия окна"></button>
                <h2 className="popup__title">{props.title}</h2>
                {/* <input className="popup__input popup__input_type_name" type="text" name="name" id="name-input" placeholder="Имя"
                      required minlength="2" maxlength="40" />
