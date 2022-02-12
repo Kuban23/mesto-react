@@ -1,11 +1,11 @@
+// import React from 'react';
+
+// function ImagePopup() {
+//    return (
+
+//    );
 
 
-function ImagePopup() {
-   return (
-rf
-   );
+// };
 
-
-};
-
-export default ImagePopup;
+// export default ImagePopup;
