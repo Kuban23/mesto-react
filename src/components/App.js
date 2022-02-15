@@ -25,7 +25,7 @@ function App() {
    };
 
    // Закрываем все попапы
-   function closeAllPopup(){
+   function closeAllPopup() {
       setIsEditAvatarPopupOpen(false);
       setIsEditProfilePopupOpen(false);
       setIsAddPlacePopupOpen(false);
