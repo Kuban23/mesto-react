@@ -4,7 +4,7 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
-//import ImagePopup from './ImagePopup';
+import ImagePopup from './ImagePopup';
 
 function App() {
 
@@ -12,6 +12,7 @@ function App() {
    const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
    const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
    const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+   const [selectedCard, setSelectedCard] = React.useState();
 
    // Обработчики для переменных состояния, стэйтовые переменные.
    function handleEditAvatarClick() {
@@ -24,11 +25,16 @@ function App() {
       setIsAddPlacePopupOpen(true);
    };
 
+   function handleCardClick(data) {
+      setSelectedCard(data);
+   };
+
    // Закрываем все попапы
    function closeAllPopup() {
       setIsEditAvatarPopupOpen(false);
       setIsEditProfilePopupOpen(false);
       setIsAddPlacePopupOpen(false);
+      setSelectedCard();
    }
 
 
@@ -39,10 +45,10 @@ function App() {
          {/* <!--Блок profile ----------------------------------------------------------------------------> */}
          {/* <!--Блок elements ----------------------------------------------------------------------------> */}
          <Main
-         
             onEditAvatar={handleEditAvatarClick}
             onEditProfile={handleEditProfileClick}
             onAddPlace={handleEditPlaceClick}
+            onCardClick={handleCardClick}
          />
 
          <Footer />
@@ -81,22 +87,10 @@ function App() {
 
          </PopupWithForm>
 
-
-
-         {/* <ImagePopup /> */}
-
-
-         {/* <!-- Блок popup открытие попапа с картинкой ----------------------------------------------------------------------------> */}
-         <section className="popup popup_type_image">
-            <div className="popup__container-image">
-               <button className="popup__close popup__close_type_emage" type="button" aria-label="Кнопка закрытия окна"></button>
-               <figure className="popup__group">
-                  <img className="popup__image" src="#" alt="Изображен край или область России" />
-                  <figcaption className="popup__title-image">Наименование</figcaption>
-               </figure>
-            </div>
-         </section>
-
+         <ImagePopup
+            card={selectedCard}
+            onClose={closeAllPopup}
+         />
 
          {/* <!-- Блок popup открытие попапа для удаления карточки ----------------------------------------------------------------------------> */}
          <section className="popup popup_type_delete">
@@ -108,33 +102,7 @@ function App() {
                </form>
             </div>
          </section>
-
-         {/* <!-- Шаблон для карточек-фото ----------------------------------------------------------------------------> */}
-         <template className="photo-template">
-            <div className="photo">
-               <div className="photo__element">
-                  <button className="photo__trash" type="button" aria-label="Кнопка для удаления "></button>
-                  <img className="photo__image" src="#" alt="Изображен край или область России" />
-                  <div className="photo__title">
-                     <h2 className="photo__text"></h2>
-                     <div className="photo__like-container">
-                        <button className="photo__like" type="button" aria-label="Кнопка для добавления лайков"></button>
-                        <p className="photo__like-sum">0</p>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </template>
-
-
       </div>
-
-
-
-
-
-
-
 
    );
 }
