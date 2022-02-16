@@ -39,6 +39,7 @@ function App() {
          {/* <!--Блок profile ----------------------------------------------------------------------------> */}
          {/* <!--Блок elements ----------------------------------------------------------------------------> */}
          <Main
+         
             onEditAvatar={handleEditAvatarClick}
             onEditProfile={handleEditProfileClick}
             onAddPlace={handleEditPlaceClick}
