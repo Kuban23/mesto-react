@@ -11,5 +11,5 @@
 
 
 ### Проект опубликован 
-https://github.com/Kuban23/mesto-react
+https://kuban23.github.io/mesto-react/
 
