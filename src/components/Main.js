@@ -41,7 +41,7 @@ function Main(props) {
          {/* <!--Блок profile ----------------------------------------------------------------------------> */}
          <section className="profile">
             <div className="profile__image" onClick={props.onEditAvatar} >
-               <div className="profile__avatar" style={{ backgroundImage: `url(${userAvatar.avatar})` }}> </div>
+               <div className="profile__avatar" style={{ backgroundImage: `url(${userAvatar.avatar})` }}></div>
             </div>
             <div className="profile__info">
                <div className="profile__wrapper">
@@ -60,7 +60,6 @@ function Main(props) {
 
                return (
                   <Card
-
                      card={item}
                      onCardClick={props.onCardClick}
                   />
