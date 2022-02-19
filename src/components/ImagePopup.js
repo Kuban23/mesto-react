@@ -3,7 +3,7 @@ import React from 'react';
 function ImagePopup(props) {
 
    return (
-      <section className={`popup popup_type_image ${props.card ? 'popup_opened' : ''}`}>
+      <section className={`popup popup_type_image ${props.isOpened ? 'popup_opened' : ''}`}>
          <div className="popup__container-image">
             <button className="popup__close popup__close_type_emage" onClick={props.onClose} type="button" aria-label="Кнопка закрытия окна"></button>
             <figure className="popup__group">
@@ -12,6 +12,7 @@ function ImagePopup(props) {
             </figure>
          </div>
       </section>
+
    );
 
 

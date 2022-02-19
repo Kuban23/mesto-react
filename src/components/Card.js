@@ -12,7 +12,7 @@ function Card(props) {
       <div className="photo">
          <div className="photo__element" >
             <button className="photo__trash" type="button" aria-label="Кнопка для удаления "></button>
-            <img className="photo__image" onClick={handleClick} src={props.card.link} alt="Изображен край или область России" />
+            <img className="photo__image" onClick={handleClick} src={props.card.link} alt={props.card.name} />
             <div className="photo__title">
                <h2 className="photo__text">{props.card.name}</h2>
                <div className="photo__like-container">
