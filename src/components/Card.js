@@ -21,11 +21,18 @@ function Card(props) {
    const cardLikeButtonClassName = `photo__like ${isLiked ? 'photo__like_active' : 'photo__like'}`;
 
 
-
+   // Функция клика по карточке
    function handleClick() {
 
       props.onCardClick(props.card);
    }
+
+   // Функция клика, постановка и удаления лайка
+   function handleLikeClick(){
+      props.onCardLike(props.card);
+   }
+
+
 
    return (
 
@@ -36,7 +43,7 @@ function Card(props) {
             <div className="photo__title">
                <h2 className="photo__text">{props.card.name}</h2>
                <div className="photo__like-container">
-                  <button className={cardLikeButtonClassName} type="button" aria-label="Кнопка для добавления лайков"></button>
+                  <button className={cardLikeButtonClassName} onClick={handleLikeClick} type="button" aria-label="Кнопка для добавления лайков"></button>
                   <p className="photo__like-sum">{props.card.likes.length}</p>
                </div>
             </div>

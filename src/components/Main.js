@@ -9,9 +9,11 @@ function Main(props) {
    const currentUser = React.useContext(CurrentUserContext);
 
    // Переменные состояния
+
    // const [userName, setUserName] = React.useState('');
    // const [userDescription, setUserDescription] = React.useState('');
    // const [userAvatar, setUserAvatar] = React.useState('');
+
    const [cards, setCards] = React.useState([]);
 
    // Эффект при монтировании компонента, для запроса API за пользовательскими данными
@@ -26,6 +28,19 @@ function Main(props) {
    //          console.log(error);
    //       });
    // }, []);
+
+   // При клике по кнопке лайк будет запускаться функция
+   function handleCardLike(card) {
+      // Снова проверяем, есть ли уже лайк на этой карточке
+      const isLiked = card.likes.some(i => i._id === currentUser._id);
+
+      // Отправляем запрос в API и получаем обновлённые данные карточки
+      api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
+         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+      });
+   }
+
+
 
    React.useEffect(() => {
       api.getLoadCards()
@@ -67,6 +82,7 @@ function Main(props) {
                      card={item}
                      onCardClick={props.onCardClick}
                      key={item._id}
+                     onCardLike={handleCardLike}
                   />
                )
             })
