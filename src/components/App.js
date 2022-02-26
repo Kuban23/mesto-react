@@ -5,6 +5,8 @@ import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
+import api from '../utils/Api';
+import {CurrentUserContext} from '../contexts/CurrentUserContext';
 
 
 function App() {
@@ -15,6 +17,20 @@ function App() {
    const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
    const [selectedCard, setSelectedCard] = React.useState(false);
    const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
+
+   // Переменная состояния для текущего пользователя.
+   const [currentUser, setcurrentUser] = React.useState({});
+
+   // Эффект который будет вызывать getProfileUserInfo() и обновлять стейт переменную из полученного значения
+   React.useEffect(() => {
+      api.getProfileUserInfo()
+         .then((userData) => {
+            setcurrentUser(userData)
+         })
+         .catch((error) => {
+            console.log(error);
+         })
+   }, []);
 
 
 
@@ -46,6 +62,7 @@ function App() {
 
 
    return (
+      <CurrentUserContext.Provider value={currentUser}>
       <div className='background'>
          <div className="page">
 
@@ -105,6 +122,7 @@ function App() {
             <PopupWithForm title='Вы уверены?' name='confirm' buttonTitleSubmit='Да' onClose={closeAllPopup}></PopupWithForm>
          </div>
       </div>
+      </CurrentUserContext.Provider>
    );
 }
 
