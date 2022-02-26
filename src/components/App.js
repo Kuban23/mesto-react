@@ -6,7 +6,8 @@ import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import api from '../utils/Api';
-import {CurrentUserContext} from '../contexts/CurrentUserContext';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import  EditProfilePopup  from './EditProfilePopup';
 
 
 function App() {
@@ -63,32 +64,32 @@ function App() {
 
    return (
       <CurrentUserContext.Provider value={currentUser}>
-      <div className='background'>
-         <div className="page">
+         <div className='background'>
+            <div className="page">
 
-            <Header />
-            {/* <!--Блок profile ----------------------------------------------------------------------------> */}
-            {/* <!--Блок elements ----------------------------------------------------------------------------> */}
-            <Main
-               onEditAvatar={handleEditAvatarClick}
-               onEditProfile={handleEditProfileClick}
-               onAddPlace={handleEditPlaceClick}
-               onCardClick={handleCardClick}
-            />
+               <Header />
+               {/* <!--Блок profile ----------------------------------------------------------------------------> */}
+               {/* <!--Блок elements ----------------------------------------------------------------------------> */}
+               <Main
+                  onEditAvatar={handleEditAvatarClick}
+                  onEditProfile={handleEditProfileClick}
+                  onAddPlace={handleEditPlaceClick}
+                  onCardClick={handleCardClick}
+               />
 
-            <Footer />
+               <Footer />
 
-            {/* <!-- Блок popup открытие попапа с аватаром ----------------------------------------------------------------------------> */}
-            <PopupWithForm title='Обновить аватар' name='avatar' isOpen={isEditAvatarPopupOpen} buttonTitleSubmit='Сохранить' onClose={closeAllPopup}>
+               {/* <!-- Блок popup открытие попапа с аватаром ----------------------------------------------------------------------------> */}
+               <PopupWithForm title='Обновить аватар' name='avatar' isOpen={isEditAvatarPopupOpen} buttonTitleSubmit='Сохранить' onClose={closeAllPopup}>
 
-               <input className="popup__input popup__input_type_link popup__input-avatar" name="link" id="avatar-link-input"
-                  type="url" placeholder="Ссылка на аватар" required />
-               <span className="popup__input-error avatar-link-input-error"></span>
+                  <input className="popup__input popup__input_type_link popup__input-avatar" name="link" id="avatar-link-input"
+                     type="url" placeholder="Ссылка на аватар" required />
+                  <span className="popup__input-error avatar-link-input-error"></span>
 
-            </PopupWithForm>
+               </PopupWithForm>
 
-            {/* <!-- Блок popup profile ----------------------------------------------------------------------------> */}
-            <PopupWithForm title='Редактировать профиль' name='profile' isOpen={isEditProfilePopupOpen} buttonTitleSubmit='Сохранить' onClose={closeAllPopup}>
+               {/* <!-- Блок popup profile ----------------------------------------------------------------------------> */}
+               {/* <PopupWithForm title='Редактировать профиль' name='profile' isOpen={isEditProfilePopupOpen} buttonTitleSubmit='Сохранить' onClose={closeAllPopup}>
 
                <input className="popup__input popup__input_type_name" type="text" name="name" id="name-input" placeholder="Имя"
                   required minLength="2" maxLength="40" />
@@ -97,31 +98,37 @@ function App() {
                   placeholder="Профессия" required minLength="2" maxLength="200" />
                <span className="popup__input-error profession-input-error"></span>
 
-            </PopupWithForm>
+            </PopupWithForm> */}
 
-            {/* <!-- Блок popup добавление карточки ----------------------------------------------------------------------------> */}
-            <PopupWithForm title='Новое место' name='image' isOpen={isAddPlacePopupOpen} buttonTitleSubmit='Создать' onClose={closeAllPopup}>
+               {/* <!-- Блок popup добавление карточки ----------------------------------------------------------------------------> */}
+               <PopupWithForm title='Новое место' name='image' isOpen={isAddPlacePopupOpen} buttonTitleSubmit='Создать' onClose={closeAllPopup}>
 
-               <input className="popup__input popup__input_type_name popup__input_type_title" name="name" type="text"
-                  id="title-input" placeholder="Название" required minLength="2" maxLength="30" />
-               <span className="popup__input-error title-input-error"></span>
-               <input className="popup__input popup__input_type_profession popup__input_type_link" name="link" id="link-input"
-                  type="url" placeholder="Ссылка на картинку" required />
-               <span className="popup__input-error link-input-error"></span>
+                  <input className="popup__input popup__input_type_name popup__input_type_title" name="name" type="text"
+                     id="title-input" placeholder="Название" required minLength="2" maxLength="30" />
+                  <span className="popup__input-error title-input-error"></span>
+                  <input className="popup__input popup__input_type_profession popup__input_type_link" name="link" id="link-input"
+                     type="url" placeholder="Ссылка на картинку" required />
+                  <span className="popup__input-error link-input-error"></span>
 
 
-            </PopupWithForm>
+               </PopupWithForm>
 
-            <ImagePopup
-               card={selectedCard}
+               <ImagePopup
+                  card={selectedCard}
+                  onClose={closeAllPopup}
+                  isOpened={isImagePopupOpen}
+               />
+
+               {/* <!-- Блок popup открытие попапа для удаления карточки ----------------------------------------------------------------------------> */}
+               <PopupWithForm title='Вы уверены?' name='confirm' buttonTitleSubmit='Да' onClose={closeAllPopup}></PopupWithForm>
+
+               <EditProfilePopup
+               isOpen={isEditProfilePopupOpen}
                onClose={closeAllPopup}
-               isOpened={isImagePopupOpen}
-            />
+               />
 
-            {/* <!-- Блок popup открытие попапа для удаления карточки ----------------------------------------------------------------------------> */}
-            <PopupWithForm title='Вы уверены?' name='confirm' buttonTitleSubmit='Да' onClose={closeAllPopup}></PopupWithForm>
+            </div>
          </div>
-      </div>
       </CurrentUserContext.Provider>
    );
 }
