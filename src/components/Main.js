@@ -29,15 +29,30 @@ function Main(props) {
    //       });
    // }, []);
 
-   // При клике по кнопке лайк будет запускаться функция
+   // Реализация постновки и удаления лайков
    function handleCardLike(card) {
       // Снова проверяем, есть ли уже лайк на этой карточке
       const isLiked = card.likes.some(i => i._id === currentUser._id);
 
       // Отправляем запрос в API и получаем обновлённые данные карточки
-      api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-      });
+      api.changeLikeCardStatus(card._id, !isLiked)
+         .then((newCard) => {
+            setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+         })
+         .catch((error) => {
+            console.log(error);
+         });
+   }
+
+   // Реализация удаления карточки
+   function handleCardDelete(card) {
+
+      // Отправляю запрос в API и получаю массив, исключаю из него удалённую карточку
+      api.deleteCard(card._id)
+         .then(() => {
+            setCards((state) => state.filter((c) => c._id !== card._id));
+         })
+
    }
 
 
@@ -83,6 +98,7 @@ function Main(props) {
                      onCardClick={props.onCardClick}
                      key={item._id}
                      onCardLike={handleCardLike}
+                     onCardDelete={handleCardDelete}
                   />
                )
             })
