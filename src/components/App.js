@@ -7,7 +7,7 @@ import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import api from '../utils/Api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
-import  EditProfilePopup  from './EditProfilePopup';
+import EditProfilePopup from './EditProfilePopup';
 
 
 function App() {
@@ -59,6 +59,18 @@ function App() {
       setIsEditProfilePopupOpen(false);
       setIsAddPlacePopupOpen(false);
       setIsImagePopupOpen(false);
+   }
+
+   // Обработчик для изменения профайла         
+   function handleUpdateUser(data) {
+      api.redactProfile(data)
+         .then((currentUserData) => {
+            setcurrentUser(currentUserData)
+            closeAllPopup()
+         })
+         .catch((error) => {
+            console.log(error);
+         })
    }
 
 
@@ -123,8 +135,9 @@ function App() {
                <PopupWithForm title='Вы уверены?' name='confirm' buttonTitleSubmit='Да' onClose={closeAllPopup}></PopupWithForm>
 
                <EditProfilePopup
-               isOpen={isEditProfilePopupOpen}
-               onClose={closeAllPopup}
+                  isOpen={isEditProfilePopupOpen}
+                  onClose={closeAllPopup}
+                  onUpdateUser={handleUpdateUser}
                />
 
             </div>
