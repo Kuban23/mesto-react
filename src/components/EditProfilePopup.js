@@ -27,7 +27,7 @@ function EditProfilePopup(props) {
       setDescription(currentUser.about);
    }, [currentUser]);
 
-   // Обработчик handleSubmit          //
+   // Обработчик handleSubmit          
    function handleSubmit(evt) {
       evt.preventDefault();
       // Передаем значения управляемых компонентов во внешний обработчик 

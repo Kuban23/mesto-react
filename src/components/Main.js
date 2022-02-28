@@ -74,8 +74,9 @@ function Main(props) {
 
          {/* <!--Блок profile ----------------------------------------------------------------------------> */}
          <section className="profile">
-            <div className="profile__image" onClick={props.onEditAvatar} >
+            <div className="profile__image" onClick={props.onEditAvatar}>
                <div className="profile__avatar" style={{ backgroundImage: `url(${currentUser.avatar})` }}></div>
+            {/* <img className="profile__avatar" src='currentUser.avatar'/> */}
             </div>
             <div className="profile__info">
                <div className="profile__wrapper">

@@ -8,6 +8,7 @@ import ImagePopup from './ImagePopup';
 import api from '../utils/Api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
 
 
 function App() {
@@ -20,13 +21,13 @@ function App() {
    const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
 
    // Переменная состояния для текущего пользователя.
-   const [currentUser, setcurrentUser] = React.useState({});
+   const [currentUser, setCurrentUser] = React.useState({});
 
    // Эффект который будет вызывать getProfileUserInfo() и обновлять стейт переменную из полученного значения
    React.useEffect(() => {
       api.getProfileUserInfo()
          .then((userData) => {
-            setcurrentUser(userData)
+            setCurrentUser(userData)
          })
          .catch((error) => {
             console.log(error);
@@ -65,13 +66,26 @@ function App() {
    function handleUpdateUser(data) {
       api.redactProfile(data)
          .then((currentUserData) => {
-            setcurrentUser(currentUserData)
+            setCurrentUser(currentUserData)
             closeAllPopup()
          })
          .catch((error) => {
             console.log(error);
          })
    }
+
+   // Обработчик для изменения аватара
+   function handleUpdateAvatar({avatar}) {
+      api.redactAvatar({avatar})
+         .then((currentUserData) => {
+            setCurrentUser(currentUserData)
+            closeAllPopup()
+         })
+         .catch((error) => {
+            console.log(error);
+         })
+   }
+
 
 
    return (
@@ -92,13 +106,13 @@ function App() {
                <Footer />
 
                {/* <!-- Блок popup открытие попапа с аватаром ----------------------------------------------------------------------------> */}
-               <PopupWithForm title='Обновить аватар' name='avatar' isOpen={isEditAvatarPopupOpen} buttonTitleSubmit='Сохранить' onClose={closeAllPopup}>
+               {/* <PopupWithForm title='Обновить аватар' name='avatar' isOpen={isEditAvatarPopupOpen} buttonTitleSubmit='Сохранить' onClose={closeAllPopup}>
 
                   <input className="popup__input popup__input_type_link popup__input-avatar" name="link" id="avatar-link-input"
                      type="url" placeholder="Ссылка на аватар" required />
                   <span className="popup__input-error avatar-link-input-error"></span>
 
-               </PopupWithForm>
+               </PopupWithForm> */}
 
                {/* <!-- Блок popup profile ----------------------------------------------------------------------------> */}
                {/* <PopupWithForm title='Редактировать профиль' name='profile' isOpen={isEditProfilePopupOpen} buttonTitleSubmit='Сохранить' onClose={closeAllPopup}>
@@ -138,6 +152,12 @@ function App() {
                   isOpen={isEditProfilePopupOpen}
                   onClose={closeAllPopup}
                   onUpdateUser={handleUpdateUser}
+               />
+
+               <EditAvatarPopup
+                  isOpen={isEditAvatarPopupOpen}
+                  onClose={closeAllPopup}
+                  onUpdateAvatar={handleUpdateAvatar}
                />
 
             </div>
