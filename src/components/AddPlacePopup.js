@@ -26,7 +26,13 @@ function AddPlacePopup(props) {
       });
    }
 
-  
+   // После загрузки картинки очищаем инпуты в попапе
+   React.useEffect(() => {
+      setName('')
+      setLink('')
+   }, [props.isOpen])
+
+
    return (
       <PopupWithForm title='Новое место' name='image' isOpen={props.isOpen} buttonTitleSubmit='Создать'
          onClose={props.onClose} onSubmit={handleSubmit}>
