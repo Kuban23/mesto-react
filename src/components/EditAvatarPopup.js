@@ -6,17 +6,12 @@ function EditAvatarPopup(props) {
    // Записываем объект, возвращаемый хуком, в переменную
    const avatarRef = React.useRef();
 
-    // Обработчик изменения инпутов
-   // function handleChangeAvatar(evt) {
-   //    avatarRef.current.value(evt.target.value);
-   // }
-
    // Обработчик handleSubmit   
    function handleSubmit(evt) {
       evt.preventDefault();
       // Передаем значения инпута, полученное с помощью рефа. 
       props.onUpdateAvatar({
-         
+
          avatar: avatarRef.current.value,
       });
 

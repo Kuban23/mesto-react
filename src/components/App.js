@@ -9,7 +9,7 @@ import api from '../utils/Api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
-
+import AddPlacePopup from './AddPlacePopup';
 
 function App() {
 
@@ -19,6 +19,9 @@ function App() {
    const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
    const [selectedCard, setSelectedCard] = React.useState(false);
    const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
+
+   // Переменные состояния cards
+   const [cards, setCards] = React.useState([]);
 
    // Переменная состояния для текущего пользователя.
    const [currentUser, setCurrentUser] = React.useState({});
@@ -33,7 +36,6 @@ function App() {
             console.log(error);
          })
    }, []);
-
 
 
    // Обработчики для переменных состояния, стэйтовые переменные.
@@ -75,8 +77,8 @@ function App() {
    }
 
    // Обработчик для изменения аватара
-   function handleUpdateAvatar({avatar}) {
-      api.redactAvatar({avatar})
+   function handleUpdateAvatar({ avatar }) {
+      api.redactAvatar({ avatar })
          .then((currentUserData) => {
             setCurrentUser(currentUserData)
             closeAllPopup()
@@ -86,7 +88,54 @@ function App() {
          })
    }
 
+   // Реализация постновки и удаления лайков
+   function handleCardLike(card) {
+      // Снова проверяем, есть ли уже лайк на этой карточке
+      const isLiked = card.likes.some(i => i._id === currentUser._id);
 
+      // Отправляем запрос в API и получаем обновлённые данные карточки
+      api.changeLikeCardStatus(card._id, !isLiked)
+         .then((newCard) => {
+            setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+         })
+         .catch((error) => {
+            console.log(error);
+         });
+   }
+
+   // Реализация удаления карточки
+   function handleCardDelete(card) {
+
+      // Отправляю запрос в API и получаю массив, исключаю из него удалённую карточку
+      api.deleteCard(card._id)
+         .then(() => {
+            setCards((state) => state.filter((c) => c._id !== card._id));
+         })
+
+   }
+
+   // Загрузка карточек с сервера
+   React.useEffect(() => {
+      api.getLoadCards()
+         .then((data) => {
+            setCards(data);
+         })
+         .catch((error) => {
+            console.log(error);
+         });
+   }, []);
+
+   // Запрос API добавление новой карточки
+   function handleAddPlaceSubmit(data) {
+      api.addCard(data)
+         .then((newCard) => {
+            setCards([newCard, ...cards])
+            closeAllPopup()
+         })
+         .catch((error) => {
+            console.log(error);
+         });
+   }
 
    return (
       <CurrentUserContext.Provider value={currentUser}>
@@ -101,43 +150,12 @@ function App() {
                   onEditProfile={handleEditProfileClick}
                   onAddPlace={handleEditPlaceClick}
                   onCardClick={handleCardClick}
+                  cards={cards}
+                  onCardLike={handleCardLike}
+                  onCardDelete={handleCardDelete}
                />
 
                <Footer />
-
-               {/* <!-- Блок popup открытие попапа с аватаром ----------------------------------------------------------------------------> */}
-               {/* <PopupWithForm title='Обновить аватар' name='avatar' isOpen={isEditAvatarPopupOpen} buttonTitleSubmit='Сохранить' onClose={closeAllPopup}>
-
-                  <input className="popup__input popup__input_type_link popup__input-avatar" name="link" id="avatar-link-input"
-                     type="url" placeholder="Ссылка на аватар" required />
-                  <span className="popup__input-error avatar-link-input-error"></span>
-
-               </PopupWithForm> */}
-
-               {/* <!-- Блок popup profile ----------------------------------------------------------------------------> */}
-               {/* <PopupWithForm title='Редактировать профиль' name='profile' isOpen={isEditProfilePopupOpen} buttonTitleSubmit='Сохранить' onClose={closeAllPopup}>
-
-               <input className="popup__input popup__input_type_name" type="text" name="name" id="name-input" placeholder="Имя"
-                  required minLength="2" maxLength="40" />
-               <span className="popup__input-error name-input-error"></span>
-               <input className="popup__input popup__input_type_profession" type="text" name="about" id="profession-input"
-                  placeholder="Профессия" required minLength="2" maxLength="200" />
-               <span className="popup__input-error profession-input-error"></span>
-
-            </PopupWithForm> */}
-
-               {/* <!-- Блок popup добавление карточки ----------------------------------------------------------------------------> */}
-               <PopupWithForm title='Новое место' name='image' isOpen={isAddPlacePopupOpen} buttonTitleSubmit='Создать' onClose={closeAllPopup}>
-
-                  <input className="popup__input popup__input_type_name popup__input_type_title" name="name" type="text"
-                     id="title-input" placeholder="Название" required minLength="2" maxLength="30" />
-                  <span className="popup__input-error title-input-error"></span>
-                  <input className="popup__input popup__input_type_profession popup__input_type_link" name="link" id="link-input"
-                     type="url" placeholder="Ссылка на картинку" required />
-                  <span className="popup__input-error link-input-error"></span>
-
-
-               </PopupWithForm>
 
                <ImagePopup
                   card={selectedCard}
@@ -158,6 +176,12 @@ function App() {
                   isOpen={isEditAvatarPopupOpen}
                   onClose={closeAllPopup}
                   onUpdateAvatar={handleUpdateAvatar}
+               />
+
+               <AddPlacePopup
+                  isOpen={isAddPlacePopupOpen}
+                  onClose={closeAllPopup}
+                  onAddPlace={handleAddPlaceSubmit}
                />
 
             </div>
