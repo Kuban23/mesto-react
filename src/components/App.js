@@ -1,5 +1,4 @@
 import React from 'react';
-import '../index.css';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -17,7 +16,7 @@ function App() {
    const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
    const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
    const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-   const [selectedCard, setSelectedCard] = React.useState(false);
+   const [selectedCard, setSelectedCard] = React.useState(null);
    const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
 
    // Переменные состояния cards
@@ -26,11 +25,17 @@ function App() {
    // Переменная состояния для текущего пользователя.
    const [currentUser, setCurrentUser] = React.useState({});
 
-   // Эффект который будет вызывать getProfileUserInfo() и обновлять стейт переменную из полученного значения
+   // Эффект который будет вызывать getProfileUserInfo() и getLoadCards(), обновлять стейт переменную 
+   // из полученного значения и загрузку карточек с сервера. 
    React.useEffect(() => {
-      api.getProfileUserInfo()
-         .then((userData) => {
+      Promise.all([ // в Promise.all передаем массив промисов которые нужно выполнить
+         api.getProfileUserInfo(),
+         api.getLoadCards()
+      ])
+         .then(([userData, cardsData]) => {
             setCurrentUser(userData)
+            setCards(cardsData)
+            closeAllPopup()
          })
          .catch((error) => {
             console.log(error);
@@ -64,7 +69,7 @@ function App() {
       setIsImagePopupOpen(false);
    }
 
-   // Обработчик для изменения профайла         
+   // Обработчик для изменения профайла 
    function handleUpdateUser(data) {
       api.redactProfile(data)
          .then((currentUserData) => {
@@ -111,19 +116,11 @@ function App() {
          .then(() => {
             setCards((state) => state.filter((c) => c._id !== card._id));
          })
-
-   }
-
-   // Загрузка карточек с сервера
-   React.useEffect(() => {
-      api.getLoadCards()
-         .then((data) => {
-            setCards(data);
-         })
          .catch((error) => {
             console.log(error);
-         });
-   }, []);
+         })
+
+   }
 
    // Запрос API добавление новой карточки
    function handleAddPlaceSubmit(data) {
