@@ -134,6 +134,28 @@ function App() {
          });
    }
 
+   //Реализация закрытия popup по клавише Esc и клике по оверлей
+   React.useEffect(() => {
+
+      function handleEscClosePopup(evt) {
+         evt.key == 'Escape' && closeAllPopup();
+      }
+
+      function handleOverlayClosePopup(evt) {
+         evt.target.classList.contains('popup_opened') && closeAllPopup();
+      }
+
+      window.addEventListener('keydown', handleEscClosePopup);
+      window.addEventListener('click', handleOverlayClosePopup);
+
+      return () => {
+         window.removeEventListener('keydown', handleEscClosePopup);
+         window.removeEventListener('click', handleOverlayClosePopup);
+      }
+
+   }, [])
+
+
    return (
       <CurrentUserContext.Provider value={currentUser}>
          <div className='background'>
