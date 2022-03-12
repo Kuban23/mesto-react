@@ -14,5 +14,7 @@
 Попапы вынесены в отдельные компоненты. 
 
 ### Проект опубликован 
-https://kuban23.github.io/mesto-react/
+
+[Ссылка на проект](https://kuban23.github.io/mesto-react/)
+
 
