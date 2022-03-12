@@ -8,7 +8,7 @@ function EditAvatarPopup(props) {
 
    // Обработчик handleSubmit   
    function handleSubmit(evt) {
-      evt.preventDefault();
+      // evt.preventDefault();
       // Передаем значения инпута, полученное с помощью рефа. 
       props.onUpdateAvatar({
 

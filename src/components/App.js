@@ -9,6 +9,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
+import ConfirmPopup from './ConfirmPopup';
 
 function App() {
 
@@ -18,6 +19,10 @@ function App() {
    const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
    const [selectedCard, setSelectedCard] = React.useState(null);
    const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
+   ///////////////////////////////////////////////////////////
+   const [isConfirmPopup, setIsConfirmPopup] = React.useState(false);
+// const [isImage]=React.useState(false);
+
 
    // Переменные состояния cards
    const [cards, setCards] = React.useState([]);
@@ -60,13 +65,26 @@ function App() {
       setSelectedCard(data);
       setIsImagePopupOpen(true);
    };
+   /////////////////////////////////////////////////////////////
+   function handleConfirmPopup() {
+      setIsConfirmPopup(true);
+   }
 
+// Функция удаления карточки /////////////////////////////
+   function handleCardDeleteClick(card){
+      setSelectedCard(card);
+      setIsConfirmPopup(true);
+   }
+
+
+  
    // Закрываем все попапы
    function closeAllPopup() {
       setIsEditAvatarPopupOpen(false);
       setIsEditProfilePopupOpen(false);
       setIsAddPlacePopupOpen(false);
       setIsImagePopupOpen(false);
+      setIsConfirmPopup(false);
    }
 
    // Обработчик для изменения профайла 
@@ -115,6 +133,7 @@ function App() {
       api.deleteCard(card._id)
          .then(() => {
             setCards((state) => state.filter((c) => c._id !== card._id));
+            closeAllPopup()
          })
          .catch((error) => {
             console.log(error);
@@ -171,7 +190,10 @@ function App() {
                   onCardClick={handleCardClick}
                   cards={cards}
                   onCardLike={handleCardLike}
-                  onCardDelete={handleCardDelete}
+                  //onCardDelete={handleCardDelete}
+                  onConfirmPopup={handleConfirmPopup}
+                  //onImagePopup={handlePopupImageOpen}
+                  onCardDelete={handleCardDeleteClick}
                />
 
                <Footer />
@@ -181,9 +203,6 @@ function App() {
                   onClose={closeAllPopup}
                   isOpened={isImagePopupOpen}
                />
-
-               {/* <!-- Блок popup открытие попапа для удаления карточки ----------------------------------------------------------------------------> */}
-               <PopupWithForm title='Вы уверены?' name='confirm' buttonTitleSubmit='Да' onClose={closeAllPopup}></PopupWithForm>
 
                <EditProfilePopup
                   isOpen={isEditProfilePopupOpen}
@@ -202,6 +221,15 @@ function App() {
                   onClose={closeAllPopup}
                   onAddPlace={handleAddPlaceSubmit}
                />
+
+               <ConfirmPopup
+
+                  isOpen={isConfirmPopup}
+                  onClose={closeAllPopup}
+                  onCardDelete= {()=>handleCardDelete(selectedCard)} /////////
+
+               />
+
 
             </div>
          </div>

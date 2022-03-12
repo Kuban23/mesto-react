@@ -29,7 +29,7 @@ function EditProfilePopup(props) {
 
    // Обработчик handleSubmit          
    function handleSubmit(evt) {
-      evt.preventDefault();
+      // evt.preventDefault();
       // Передаем значения управляемых компонентов во внешний обработчик 
       props.onUpdateUser({
          name,

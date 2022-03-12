@@ -32,9 +32,10 @@ function Card(props) {
       props.onCardLike(props.card);
    }
 
-   // Функция удаления карточки
-   function handleCardDeleteClick(){
-      props.onCardDelete(props.card);
+     // Функция открытия подтверждения удаления карточки
+   function deleteConfirmPopup() {
+      props.onConfirmPopup();
+      props.onCardDelete(props.card)
    }
 
 
@@ -42,7 +43,7 @@ function Card(props) {
 
       <div className="photo">
          <div className="photo__element" >
-            <button className={cardDeleteButtonClassName} onClick= {handleCardDeleteClick} type="button" aria-label="Кнопка для удаления "></button>
+            <button className={cardDeleteButtonClassName} onClick={deleteConfirmPopup} type="button" aria-label="Кнопка для удаления "></button>
             <img className="photo__image" onClick={handleClick} src={props.card.link} alt={props.card.name} />
             <div className="photo__title">
                <h2 className="photo__text">{props.card.name}</h2>

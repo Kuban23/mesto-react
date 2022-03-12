@@ -39,9 +39,12 @@ function Main(props) {
                      onCardClick={props.onCardClick}
                      key={item._id}
                      onCardLike={props.onCardLike}
-                     onCardDelete={props.onCardDelete}
+                     //onCardDelete={props.onCardDelete}
                      cards={props.cards}
+                     onConfirmPopup={props.onConfirmPopup}
+                     onCardDelete={props.onCardDelete}
                   />
+                  
                )
             })
             }
